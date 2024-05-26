@@ -2,77 +2,18 @@
 
 ![GitHub](https://img.shields.io/github/license/Nek-12/AndroidUtils)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Nek-12/AndroidUtils)
-![Maintenance](https://img.shields.io/maintenance/yes/2024)
+![Maintenance](https://img.shields.io/maintenance/no/2024)
 [![Downloads on Jitpack](https://jitpack.io/v/Nek-12/AndroidUtils/month.svg)](https://jitpack.io/#Nek-12/AndroidUtils.svg)
 
 ### Maintenance Mode & Migration
 
-Since 1.0, the `core-ktx` artifact and some of the coroutine extensions have been migrated
-to [KMPUtils](https://github.com/respawn-app/KMPUtils). This repository will be maintained, with a gradual migration
-towards KMPUtils. Not all modules will be migrated, because KMPUtils is not a replacement to AndroidUtils.
-See the releases section if you want to know how to migrate.
+### 🛑 Since 1.0, this library has been integrated into  [KMPUtils](https://github.com/respawn-app/KMPUtils). This repository is **no longer maintained**
+
+Not everything was migrated, namely room, preferences and view extensions. Please copy and paste those into your project
+if you are still using them and do not wish to migrate to a more modern stack.
 
 Latest version
 is  [![Jitpack Version](https://jitpack.io/v/Nek-12/AndroidUtils.svg)](https://jitpack.io/#Nek-12/AndroidUtils)
-
-Extensions available:
-
-```kotlin
-val utilsVersion = "<look up 👆🏻>"
-implementation("com.github.Nek-12.AndroidUtils:android-ktx:$utilsVersion")
-implementation("com.github.Nek-12.AndroidUtils:room:$utilsVersion")
-implementation("com.github.Nek-12.AndroidUtils:viewbinding:$utilsVersion")
-implementation("com.github.Nek-12.AndroidUtils:preferences-ktx:$utilsVersion")
-implementation("com.github.Nek-12.AndroidUtils:safenavcontroller:$utilsVersion")
-implementation("com.github.Nek-12.AndroidUtils:material-ktx:$utilsVersion")
-implementation("com.github.Nek-12.AndroidUtils:view-ktx:$utilsVersion")
-implementation("com.github.Nek-12.AndroidUtils:compose-ktx:$utilsVersion")
-```  
-### Room
-
-For documentation on `room`, check out [this one](docs/room.md)
-
-## Other components
-
-Documentation on those is still TBD, however there is not much code in them, so you can check out sources or javadocs if
-you want more.
-
-* `preferences-ktx `- A sharedPreferences delegate that allows you to write one-liners for loading and saving data
-  from/to your app's default SharedPreferences. Uses `SharedPreferences.Editor.apply()` that does operations on
-  background thread and caches values. SharedPreferences is a Singleton object so you can easily get as many references
-  as you want, if you use default shared preferences, don't worry about accessing or creating properties. However, if
-  you're using custom sharedPreferences argument, you must manage the lifecycle yourself.  
-  If you don't specify a key (by default it's null), property name will be used. example:
-     ```
-     var isFirstLaunch by booleanPreference()
-     if (isFirstLaunch) {
-         //...
-     }
-     isFirstLaunch = false
-    ```
-
-* `android-ktx` - Will give you multiple extension functions, and a WebClient - the WebViewClient that solves almost all
-  problems of the usual Client + WebView pairing you may encounter, such as crashes and errors on unknown link types, no
-  way to handle external links, security vulnerabilities, and the mess that Google made of WebViewClient callbacks (when
-  same callback gets called 2, 3 or more times in a row. It is also not bound to the view lifecycle, so you can just
-  attach and detach it and your data will be safe, even in ViewModel)
-* `compose-ktx` will let you streamline your code by providing a new way to work with resources. Instead of writing
-  ```kotlin
-  stringResource(R.string.some_string) 
-  ```  
-  you can now write
-  ```kotlin
-  R.string.some_string.string() //plurals, drawables and AVDs supported too
-  ```
-  And as always, useful extensions included
-
-For more information and other examples see javadocs in the library code. This library is not that complicated to need
-to have any additional knowledge prior using it.
-
-* [This Medium Post](https://medium.com/@berryhuang/android-room-generic-dao-27cfc21a4912) inspired me to create a
-  generic DAO implementation.
-* Other extensions, tricks, classes and ideas were inspired by open-source community: Medium posts, StackOverflow
-  answers, other libraries and so on. Thanks to everyone for such a valuable information!
 
 ## License
 
