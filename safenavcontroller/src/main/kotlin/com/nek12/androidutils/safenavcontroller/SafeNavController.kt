@@ -16,6 +16,7 @@ import androidx.navigation.Navigator
  * findNavController() with this class and use it to navigate or use an extension function.
  * If navigation is not possible, the operation will be simply canceled.
  */
+@Deprecated(Deprecation)
 class SafeNavController(
     @IdRes val currentFragmentId: Int,
     private val navController: NavController,
@@ -25,6 +26,7 @@ class SafeNavController(
      * @param from The navigation ID of the current fragment you want to navigate from
      * @param to The id of the fragment to navigate
      */
+    @Deprecated(Deprecation)
     fun navigate(@IdRes to: Int) = navigate(to, null)
 
     /**
@@ -32,6 +34,7 @@ class SafeNavController(
      * @param to The id of the fragment to navigate
      * @param bundle Unsafe navigation arguments to pass
      */
+    @Deprecated(Deprecation)
     fun navigate(@IdRes to: Int, bundle: Bundle?) =
         navigate(to, bundle, null, null)
 
@@ -39,6 +42,7 @@ class SafeNavController(
      * @param from The navigation ID of the current fragment you want to navigate from
      * @param to The id of the fragment to navigate
      */
+    @Deprecated(Deprecation)
     fun navigate(
         @IdRes to: Int,
         bundle: Bundle?,
@@ -54,6 +58,7 @@ class SafeNavController(
      * @param from The navigation ID of the current fragment you want to navigate from
      * @param directions Generated NavDirections class. Pass argunments to them if you wish.
      */
+    @Deprecated(Deprecation)
     fun navigate(
         directions: NavDirections,
         extras: Navigator.Extras,
@@ -63,6 +68,7 @@ class SafeNavController(
         }
     }
 
+    @Deprecated(Deprecation)
     fun navigate(
         directions: NavDirections,
     ) {
@@ -71,7 +77,9 @@ class SafeNavController(
         }
     }
 
+    @Deprecated(Deprecation)
     fun navigateUp() = navController.navigateUp()
 
+    @Deprecated(Deprecation)
     fun popBackStack() = navController.popBackStack()
 }

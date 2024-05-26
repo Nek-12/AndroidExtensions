@@ -28,6 +28,14 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.nek12.extensions.material.R
 
+private const val Deprecation = """
+    XML is deprecated.
+    The maintainer team no longer uses XML and cannot provide support for this module anymore.
+    Please either: 
+      - Migrate to Compose and use KMPUtils https://github.com/respawn-app/KMPUtils
+      - Copy and paste these extensions into your project
+"""
+
 const val SNACKBAR_MAX_LINES = 3
 
 /**
@@ -35,6 +43,7 @@ const val SNACKBAR_MAX_LINES = 3
  * @param action The action to execute on pressing the button
  * @param actionText What text to display on the action button?
  */
+@Deprecated(Deprecation)
 fun View.showSnackbar(
     msg: String,
     actionText: String,
@@ -55,6 +64,7 @@ fun View.showSnackbar(
  * @param onDismiss what is going to happen if the user does NOT cancel the action. This action will happen after a delay, when the snackbar disappears.
  *
  */
+@Deprecated(Deprecation)
 fun View.showLazyActionSnackbar(
     msg: String,
     actionText: String = this.context.getString(android.R.string.cancel),
@@ -84,6 +94,7 @@ fun View.showLazyActionSnackbar(
  * most commonly binding.root
  * Max number of lines of text is 3.
  */
+@Deprecated(Deprecation)
 fun View.showSnackbar(
     msg: String,
     duration: Int = Snackbar.LENGTH_SHORT,
@@ -105,6 +116,7 @@ fun View.showSnackbar(
  * most commonly binding.root
  * Max number of lines of text is 3.
  */
+@Deprecated(Deprecation)
 fun View.showSnackbar(
     @StringRes msg: Int,
     duration: Int = Snackbar.LENGTH_SHORT,
@@ -116,6 +128,7 @@ fun View.showSnackbar(
  * Default icon is material info icon -> (i)
  * You can specify behavior for clicking cancel and ok buttons.
  */
+@Deprecated(Deprecation)
 fun Context.showInfoDialog(
     message: String,
     title: String,
@@ -139,6 +152,7 @@ fun Context.showInfoDialog(
 /**
  * @see [Context.showInfoDialog]
  */
+@Deprecated(Deprecation)
 fun Context.showInfoDialog(
     @StringRes title: Int,
     @StringRes content: Int,
@@ -156,6 +170,7 @@ fun Context.showInfoDialog(
 /**
  * Shows a modal dialog that has "Cancel" and "OK" buttons, but the "Cancel" button does nothing
  */
+@Deprecated(Deprecation)
 fun Context.showConfirmationDialog(
     @StringRes title: Int,
     @StringRes content: Int,
@@ -167,6 +182,7 @@ fun Context.showConfirmationDialog(
 /**
  * @see [Context.showInfoDialog]
  */
+@Deprecated(Deprecation)
 fun Fragment.showInfoDialog(
     @StringRes title: Int,
     @StringRes content: Int,
@@ -180,6 +196,7 @@ fun Fragment.showInfoDialog(
 /**
  * @see [Context.showInfoDialog]
  */
+@Deprecated(Deprecation)
 fun Fragment.showInfoDialog(
     title: String,
     content: String,
@@ -197,32 +214,40 @@ fun Fragment.showInfoDialog(
 /**
  * @param ratio: The percentage of the screen the sheet should take, e.g. 0.6 = 60%
  * **/
+@Deprecated(Deprecation)
 fun BottomSheetDialogFragment.setPeekHeightRatio(ratio: Double) {
     val height = requireContext().resources.displayMetrics.heightPixels.toDouble()
     behavior.setPeekHeight((height * ratio).toInt(), true)
 }
 
+@Deprecated(Deprecation)
 val BottomSheetDialogFragment.behavior
     get() = (requireDialog() as BottomSheetDialog).behavior
 
+@Deprecated(Deprecation)
 fun BottomSheetDialogFragment.expand() {
     behavior.state = BottomSheetBehavior.STATE_EXPANDED
 }
 
+@Deprecated(Deprecation)
 fun BottomSheetDialogFragment.collapse() {
     behavior.state = BottomSheetBehavior.STATE_COLLAPSED
 }
 
+@Deprecated(Deprecation)
 fun Fragment.materialColor(@AttrRes attr: Int) = requireContext().materialColor(attr)
 
+@Deprecated(Deprecation)
 fun View.materialColor(@AttrRes attr: Int) = MaterialColors.getColor(this, attr)
 
 /**
  * Make sure you're using context that has theme attribute set (e.g. activity)
  */
+@Deprecated(Deprecation)
 fun Context.materialColor(@AttrRes attr: Int, @ColorInt defValue: Int = Color.TRANSPARENT) =
     MaterialColors.getColor(this, attr, defValue)
 
+@Deprecated(Deprecation)
 @get:ColorInt
 var MaterialButton.iconTintColor: Int?
     get() = iconTint?.defaultColor
@@ -233,6 +258,7 @@ var MaterialButton.iconTintColor: Int?
 /**
  * @param gravity: One of [BadgeDrawable.TOP_END], [BadgeDrawable.TOP_START], [BadgeDrawable.BOTTOM_END], [BadgeDrawable.BOTTOM_START]
  */
+@Deprecated(Deprecation)
 @ExperimentalBadgeUtils
 fun View.addBadge(
     gravity: Int = BadgeDrawable.TOP_END,
@@ -253,12 +279,14 @@ fun View.addBadge(
 /**
  * A [FrameLayout] that wraps your layout and hold the behavior of the bottom sheet
  */
+@Deprecated(Deprecation)
 val BottomSheetDialogFragment.bottomSheet: FrameLayout
     get() = requireDialog().findViewById(com.google.android.material.R.id.design_bottom_sheet)
 
 /**
  * Whether the height of this bottom sheet is such that when expanded it's going to be full-screen
  */
+@Deprecated(Deprecation)
 var BottomSheetDialogFragment.fullscreen: Boolean
     get() = bottomSheet.layoutParams.height == MATCH_PARENT
     set(value) {
