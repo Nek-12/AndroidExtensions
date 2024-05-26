@@ -48,7 +48,6 @@ fun String.color(color: Color) = span(SpanStyle(color = color))
 fun String.weight(weight: FontWeight) = span(SpanStyle(fontWeight = weight))
 
 @Deprecated(Migration)
-
 fun String.style(style: FontStyle) = span(SpanStyle(fontStyle = style))
 
 @Deprecated(Migration)

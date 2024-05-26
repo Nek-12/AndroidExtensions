@@ -1,11 +1,9 @@
+plugins {
+    alias(libs.plugins.compose.compiler)
+}
 android {
     buildFeatures {
         compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-        useLiveLiterals = true
     }
 
     namespace = "${rootProject.group}.compose"

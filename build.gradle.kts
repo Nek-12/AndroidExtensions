@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     alias(libs.plugins.detekt)
     alias(libs.plugins.version.catalog.update)
+    alias(libs.plugins.compose.compiler) apply false
 }
 
 rootProject.group = Config.group
@@ -82,7 +83,6 @@ allprojects {
     tasks.withType<KotlinCompile>().configureEach {
         kotlinOptions {
             jvmTarget = Config.jvmTarget.target
-            languageVersion = Config.kotlinVersion.version
         }
     }
 }

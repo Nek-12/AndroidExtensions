@@ -8,7 +8,6 @@ import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
 
 @Deprecated(Deprecation)
-
 fun Fragment.isPermissionGranted(permission: String) = context?.let {
     PermissionChecker.checkSelfPermission(it, permission) == PermissionChecker.PERMISSION_GRANTED
 } ?: false

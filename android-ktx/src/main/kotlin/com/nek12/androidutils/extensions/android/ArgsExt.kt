@@ -47,7 +47,7 @@ abstract class BundleExtra<in T, V>(
         is UNINITIALIZED_VALUE -> {
             internalValue = bundle?.get(property.name)
                 ?: defaultValue
-                        ?: if (isNullable)
+                ?: if (isNullable)
                     null
                 else
                     throw IllegalArgumentException("Required value was not provided: ${property.name}")

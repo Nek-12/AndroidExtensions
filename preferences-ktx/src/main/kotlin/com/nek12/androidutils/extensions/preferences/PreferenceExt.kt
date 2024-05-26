@@ -105,7 +105,6 @@ fun stringPreference(
 )
 
 @Deprecated(Deprecation)
-
 @SuppressLint("NewApi")
 fun instantPreference(
     preferences: SharedPreferences,
