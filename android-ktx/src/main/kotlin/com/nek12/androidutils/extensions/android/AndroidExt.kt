@@ -32,6 +32,10 @@ import androidx.core.os.bundleOf
 private const val EXTRA_FRAGMENT_ARG_KEY = ":settings:fragment_args_key"
 private const val EXTRA_SHOW_FRAGMENT_ARGUMENTS = ":settings:show_fragment_args"
 
+private const val Migration = """
+Extension modules are now deprecated. Please migrate to kmputils 
+"""
+
 @PublishedApi
 internal const val EXTRA_SYSTEM_ALERT_WINDOW = "system_alert_window"
 
