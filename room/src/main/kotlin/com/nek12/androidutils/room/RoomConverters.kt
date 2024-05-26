@@ -8,7 +8,12 @@ import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import java.time.Duration
 import java.time.Instant
-import java.util.*
+import java.util.Arrays
+
+internal const val Deprecation = """
+    The maintainer team no longer uses Room and cannot provide support for this module anymore.
+    Please copy and paste the contents of this module into your project
+"""
 
 @RequiresApi(Build.VERSION_CODES.O)
 private fun capped(instant: Instant): Instant {
@@ -23,6 +28,7 @@ private fun capped(instant: Instant): Instant {
  */
 @TypeConverters
 @RequiresApi(Build.VERSION_CODES.O)
+@Deprecated(Deprecation)
 class RoomConverters {
 
     @TypeConverter

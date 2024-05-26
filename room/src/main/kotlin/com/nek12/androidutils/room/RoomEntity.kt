@@ -20,6 +20,7 @@ package com.nek12.androidutils.room
  * @see RoomDataSource
  * @see RoomDao
  */
+@Deprecated(Deprecation)
 interface RoomEntity<T : Any> {
 
     val id: T

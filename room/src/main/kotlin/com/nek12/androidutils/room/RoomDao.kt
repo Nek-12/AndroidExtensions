@@ -30,6 +30,7 @@ import kotlinx.coroutines.flow.Flow
  **/
 @Dao
 @Suppress("MethodOverloading", "TooManyFunctions")
+@Deprecated(Deprecation)
 abstract class RoomDao<I : Any, T : RoomEntity<I>>(
     private val db: RoomDatabase,
     private val tableName: String,
