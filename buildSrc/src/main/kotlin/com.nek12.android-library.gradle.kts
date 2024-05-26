@@ -74,23 +74,6 @@ publishing {
             groupId = rootProject.group.toString()
             artifactId = project.name
             version = rootProject.version.toString()
-
-            pom.withXml {
-                val deps = configurations.implementation
-                    .orNull
-                    ?.allDependencies
-                    .orEmpty()
-                    .ifEmpty { return@withXml }
-                val dependenciesNode = asNode().appendNode("dependencies")
-                deps.forEach {
-                    if (it.name != "unspecified") {
-                        val dependencyNode = dependenciesNode.appendNode("dependency")
-                        dependencyNode.appendNode("groupId", it.group)
-                        dependencyNode.appendNode("artifactId", it.name)
-                        dependencyNode.appendNode("version", it.version)
-                    }
-                }
-            }
         }
     }
 }
