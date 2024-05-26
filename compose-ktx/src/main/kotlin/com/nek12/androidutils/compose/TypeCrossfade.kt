@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @OptIn(ExperimentalAnimationApi::class)
+@Deprecated(Migration)
 @Composable
 fun <T : Any> TypeCrossfade(
     state: T,

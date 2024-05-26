@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 
+@Deprecated(Migration)
 enum class FadingEdge {
     Start, End, Top, Bottom
 }
@@ -23,6 +24,7 @@ private const val EdgeAlpha = 0.99f
  *
  * For RTL layouts, if [rtlAware] is true, automatically inverts the fading edge direction.
  */
+@Deprecated(Migration)
 fun Modifier.fadingEdge(
     fadingEdge: FadingEdge,
     size: Dp,

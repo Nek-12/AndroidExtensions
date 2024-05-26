@@ -26,6 +26,7 @@ import kotlinx.coroutines.launch
  * @param onFill callback to execute when the user agrees to autofill the form. Most often used to update the value
  * of the form
  */
+@Deprecated(Migration)
 @OptIn(ExperimentalComposeUiApi::class)
 fun Modifier.autofill(
     onFill: ((String) -> Unit),
@@ -62,6 +63,7 @@ fun Modifier.autofill(
  *
  * For this to work, wrap your scrollable container in another and add the .imePadding() modifier
  */
+@Deprecated(Migration)
 @OptIn(ExperimentalFoundationApi::class)
 fun Modifier.bringIntoViewOnFocus() = composed {
     val coroutineScope = rememberCoroutineScope()

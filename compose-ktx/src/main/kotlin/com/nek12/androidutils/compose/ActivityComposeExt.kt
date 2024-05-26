@@ -21,6 +21,11 @@ import androidx.lifecycle.LifecycleEventObserver
 import com.nek12.androidutils.extensions.android.launchCatching
 import com.nek12.androidutils.extensions.android.withApiLevel
 
+internal const val Migration = """
+This module has been migrated to kmputils and is now unmaintained. Use kmputils or copy extensions to your project.
+https://github.com/respawn-app/KMPUtils
+"""
+
 /**
  * Possible values for [orientation]:
  *
@@ -44,6 +49,7 @@ import com.nek12.androidutils.extensions.android.withApiLevel
  * @param orientation the int constant of [Activity.getRequestedOrientation]
  */
 @Composable
+@Deprecated(Migration)
 fun LockScreenOrientation(orientation: Int) {
     val context = LocalContext.current
     DisposableEffect(orientation) {
@@ -60,6 +66,7 @@ fun LockScreenOrientation(orientation: Int) {
 /**
  * Traverses the context hierarchy until an activity is found, or null if not present.
  */
+@Deprecated(Migration)
 fun Context.findActivity(): Activity? = when (this) {
     is Activity -> this
     is ContextWrapper -> baseContext.findActivity()
@@ -75,6 +82,7 @@ fun Context.findActivity(): Activity? = when (this) {
  */
 @Composable
 @RequiresPermission(Manifest.permission.HIDE_OVERLAY_WINDOWS)
+@Deprecated(Migration)
 fun DisallowOverlays() = withApiLevel(Build.VERSION_CODES.S) {
     val context = LocalContext.current
     DisposableEffect(Unit) {
@@ -92,6 +100,7 @@ fun DisallowOverlays() = withApiLevel(Build.VERSION_CODES.S) {
  * @see [android.view.Window.setFlags]
  */
 @Composable
+@Deprecated(Migration)
 fun SetWindowFlags(flags: Int) {
     val context = LocalContext.current
     DisposableEffect(flags) {
@@ -105,6 +114,7 @@ fun SetWindowFlags(flags: Int) {
  * Keeps the screen of the current activity on while this composable is in composition.
  */
 @Composable
+@Deprecated(Migration)
 fun KeepScreenOn(enabled: Boolean = true) {
     val context = LocalContext.current
     DisposableEffect(enabled) {
@@ -124,6 +134,7 @@ fun KeepScreenOn(enabled: Boolean = true) {
  * Registers a new lifecycle observer for the lifetime of the composition of this function, then clears it.
  */
 @Composable
+@Deprecated(Migration)
 fun ObserveLifecycle(onEvent: (event: Lifecycle.Event) -> Unit) {
     val lifecycle = LocalLifecycleOwner.current
     val action by rememberUpdatedState(onEvent)
@@ -149,6 +160,7 @@ fun ObserveLifecycle(onEvent: (event: Lifecycle.Event) -> Unit) {
  * @param onAppNotFound a callback for error, if ever no apps are installed that can handle the request.
  */
 
+@Deprecated(Migration)
 inline fun ManagedActivityResultLauncher<Intent, ActivityResult>.shareAsText(
     text: String,
     onAppNotFound: (e: Exception) -> Unit
