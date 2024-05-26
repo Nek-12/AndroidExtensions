@@ -9,11 +9,20 @@ import androidx.preference.PreferenceManager
 import java.time.Instant
 import kotlin.properties.ReadWriteProperty
 
+internal const val Deprecation = """
+Shared preferences are deprecated - please migrate from shared preferences as they read files on main thread and cause
+a significant number of ANRs. Preferences are also not type safe and do not handle errors.
+By using these delegates, you cannot avoid the problems above.
+Use recommended solutions for data storage such as Json / Protobuf DataStore or a database.
+"""
+
 /**
  * Obtains default shared preferences for this application
  */
+@Deprecated(Deprecation)
 fun Context.defaultPreferences(): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
+@Deprecated(Deprecation)
 fun intPreference(
     preferences: SharedPreferences,
     defaultValue: Int = 0,
@@ -26,6 +35,7 @@ fun intPreference(
     preferences
 )
 
+@Deprecated(Deprecation)
 fun stringPreference(
     preferences: SharedPreferences,
     defaultValue: String? = null,
@@ -38,6 +48,7 @@ fun stringPreference(
     preferences
 )
 
+@Deprecated(Deprecation)
 fun booleanPreference(
     preferences: SharedPreferences,
     defaultValue: Boolean = false,
@@ -50,6 +61,7 @@ fun booleanPreference(
     preferences
 )
 
+@Deprecated(Deprecation)
 fun floatPreference(
     preferences: SharedPreferences,
     defaultValue: Float = 0f,
@@ -62,6 +74,7 @@ fun floatPreference(
     preferences
 )
 
+@Deprecated(Deprecation)
 fun longPreference(
     preferences: SharedPreferences,
     defaultValue: Long = 0L,
@@ -77,6 +90,7 @@ fun longPreference(
 /**
  * @return [defaultValue] if base [SharedPreferences.getString] returned `null`
  */
+@Deprecated(Deprecation)
 @JvmName("stringPreferenceNotNull")
 fun stringPreference(
     preferences: SharedPreferences,
@@ -89,6 +103,8 @@ fun stringPreference(
     SharedPreferences.Editor::putString,
     preferences
 )
+
+@Deprecated(Deprecation)
 
 @SuppressLint("NewApi")
 fun instantPreference(
@@ -103,6 +119,7 @@ fun instantPreference(
     preferences = preferences,
 )
 
+@Deprecated(Deprecation)
 inline fun <reified T : Enum<T>> enumStringPreference(
     preferences: SharedPreferences,
     defaultValue: T,
@@ -117,6 +134,7 @@ inline fun <reified T : Enum<T>> enumStringPreference(
 
 // ------------------  Default preferences
 
+@Deprecated(Deprecation)
 fun intPreference(
     defaultValue: Int = 0,
     key: String? = null,
@@ -127,6 +145,7 @@ fun intPreference(
     SharedPreferences.Editor::putInt
 )
 
+@Deprecated(Deprecation)
 fun stringPreference(
     defaultValue: String? = null,
     key: String? = null,
@@ -137,6 +156,7 @@ fun stringPreference(
     SharedPreferences.Editor::putString,
 )
 
+@Deprecated(Deprecation)
 fun booleanPreference(
     defaultValue: Boolean = false,
     key: String? = null,
@@ -147,6 +167,7 @@ fun booleanPreference(
     SharedPreferences.Editor::putBoolean,
 )
 
+@Deprecated(Deprecation)
 fun floatPreference(
     defaultValue: Float = 0f,
     key: String? = null,
@@ -157,6 +178,7 @@ fun floatPreference(
     SharedPreferences.Editor::putFloat,
 )
 
+@Deprecated(Deprecation)
 fun longPreference(
     defaultValue: Long = 0L,
     key: String? = null,
@@ -170,6 +192,7 @@ fun longPreference(
 /**
  * @return [defaultValue] if base [SharedPreferences.getString] returned `null`
  */
+@Deprecated(Deprecation)
 @JvmName("stringPreferenceNotNull")
 fun stringPreference(
     defaultValue: String,
@@ -181,6 +204,7 @@ fun stringPreference(
     SharedPreferences.Editor::putString
 )
 
+@Deprecated(Deprecation)
 @JvmName("enumStringPreferenceNullable")
 inline fun <reified T : Enum<T>> enumStringPreference(
     preferences: SharedPreferences,

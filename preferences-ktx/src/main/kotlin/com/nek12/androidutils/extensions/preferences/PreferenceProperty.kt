@@ -24,6 +24,7 @@ typealias PreferenceSetter<T> = SharedPreferences.Editor.(String, T) -> SharedPr
  *  isFirstLaunch = false
  * ```
  */
+@Deprecated(Deprecation)
 abstract class PreferenceProperty<in T, V>(
     private val defaultValue: V,
     private val key: String? = null,
@@ -41,6 +42,7 @@ abstract class PreferenceProperty<in T, V>(
         getPreferences(thisRef).edit().setter(key ?: property.name, value).apply()
 }
 
+@Deprecated(Deprecation)
 open class DefaultPreferenceProperty<T>(
     defaultValue: T,
     key: String? = null,
@@ -54,6 +56,7 @@ open class DefaultPreferenceProperty<T>(
         _prefs ?: thisRef.defaultPreferences().also { _prefs = it }
 }
 
+@Deprecated(Deprecation)
 open class ProvidedPreferenceProperty<T>(
     defaultValue: T,
     key: String? = null,
