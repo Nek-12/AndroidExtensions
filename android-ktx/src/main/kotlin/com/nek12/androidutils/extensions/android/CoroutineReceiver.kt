@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
  * According to Android limitations, you still have about **10 seconds** to finish the execution before
  * the system forcibly kills the receiver. For longer tasks, use WorkManager or a Service
  */
+@Deprecated(Migration)
 abstract class CoroutineReceiver : BroadcastReceiver() {
 
     protected val scope = CoroutineScope(SupervisorJob())

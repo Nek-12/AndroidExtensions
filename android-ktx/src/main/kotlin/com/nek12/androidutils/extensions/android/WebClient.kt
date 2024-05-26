@@ -20,6 +20,7 @@ import androidx.core.net.toUri
 /**
  * A listener for events that happen in [WebClient]
  */
+@Deprecated(Migration)
 interface WebClientListener {
 
     /**
@@ -59,6 +60,7 @@ interface WebClientListener {
  * [detach] it in onDestroyView.
  */
 @SuppressLint("SetJavaScriptEnabled")
+@Deprecated(Migration)
 open class WebClient(
     private val allowedHosts: List<String?>,
 ) : WebViewClient(), DownloadListener {

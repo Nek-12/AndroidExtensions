@@ -1,5 +1,6 @@
 package com.nek12.androidutils.extensions.android
 
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
@@ -10,6 +11,7 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import androidx.annotation.RequiresPermission
 
+@Deprecated(Migration)
 @Suppress("DEPRECATION")
 @RequiresPermission(android.Manifest.permission.VIBRATE)
 fun Vibrator.vibrateCompat(lengthMs: Long) {
@@ -24,6 +26,7 @@ fun Vibrator.vibrateCompat(lengthMs: Long) {
     }
 }
 
+@Deprecated(Migration)
 @Suppress("DEPRECATION")
 @RequiresPermission(android.Manifest.permission.VIBRATE)
 fun Vibrator.vibrateCompat(waveform: LongArray, repeat: Int = -1) {
@@ -41,6 +44,8 @@ fun Vibrator.vibrateCompat(waveform: LongArray, repeat: Int = -1) {
 /**
  * Will work only if QUERY_ALL_PACKAGES permission is present
  */
+@Deprecated(Migration)
+@RequiresPermission(Manifest.permission.QUERY_ALL_PACKAGES)
 fun PackageManager.getAppInfoCompat(packageName: String, flags: Int) = withApiLevel(
     versionCode = Build.VERSION_CODES.TIRAMISU,
     below = { getApplicationInfo(packageName, flags) },
@@ -50,6 +55,7 @@ fun PackageManager.getAppInfoCompat(packageName: String, flags: Int) = withApiLe
 /**
  * Will work only if QUERY_ALL_PACKAGES permission is present
  */
+@Deprecated(Migration)
 fun PackageManager.queryIntentActivitiesCompat(
     intent: Intent,
     flags: Int = 0,
@@ -59,6 +65,7 @@ fun PackageManager.queryIntentActivitiesCompat(
     since = { queryIntentActivities(intent, PackageManager.ResolveInfoFlags.of(flags.toLong())) },
 )
 
+@Deprecated(Migration)
 fun PackageManager.getInstalledPackagesCompat(
     flags: Int = 0,
 ): List<PackageInfo> = withApiLevel(

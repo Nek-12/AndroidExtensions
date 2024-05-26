@@ -32,8 +32,9 @@ import androidx.core.os.bundleOf
 private const val EXTRA_FRAGMENT_ARG_KEY = ":settings:fragment_args_key"
 private const val EXTRA_SHOW_FRAGMENT_ARGUMENTS = ":settings:show_fragment_args"
 
-private const val Migration = """
-Extension modules are now deprecated. Please migrate to kmputils 
+internal const val Migration = """
+This module has been migrated to kmputils and is now unmaintained. Use kmputils or copy extensions to your project.
+https://github.com/respawn-app/KMPUtils
 """
 
 @PublishedApi
@@ -42,11 +43,13 @@ internal const val EXTRA_SYSTEM_ALERT_WINDOW = "system_alert_window"
 /**
  * @param numberUri uri of the form tel:+1234567890, containing countryCode
  */
+@Deprecated(Migration)
 inline fun Context.dialNumber(numberUri: Uri, onNotFound: (e: Exception) -> Unit) {
     val intent = Intent(Intent.ACTION_DIAL, numberUri)
     startActivityCatching(intent, onNotFound)
 }
 
+@Deprecated(Migration)
 inline fun <I> ActivityResultLauncher<I>.launchCatching(
     input: I,
     options: ActivityOptionsCompat? = null,
@@ -59,6 +62,7 @@ inline fun <I> ActivityResultLauncher<I>.launchCatching(
     }
 }
 
+@Deprecated(Migration)
 inline fun Context.startActivityCatching(intent: Intent, onNotFound: (Exception) -> Unit) {
     try {
         startActivity(intent)
@@ -74,6 +78,7 @@ inline fun Context.startActivityCatching(intent: Intent, onNotFound: (Exception)
  *     - SecurityException - when permission to write to storage was not granted
  *     - IllegalStateException - when provided parameters are invalid (i.e. download directory can't be created)
  * */
+@Deprecated(Migration)
 inline fun Context.downloadFile(
     url: Uri,
     fileName: String,
@@ -102,6 +107,7 @@ inline fun Context.downloadFile(
     }
 }
 
+@Deprecated(Migration)
 inline fun Context.openBrowser(url: Uri, onAppNotFound: (e: Exception) -> Unit) {
     val intent = Intent(Intent.ACTION_VIEW, url).apply {
         addCategory(Intent.CATEGORY_BROWSABLE)
@@ -109,6 +115,7 @@ inline fun Context.openBrowser(url: Uri, onAppNotFound: (e: Exception) -> Unit) 
     startActivityCatching(intent, onAppNotFound)
 }
 
+@Deprecated(Migration)
 inline fun Context.shareAsText(text: String, onAppNotFound: (e: Exception) -> Unit) {
     val intent = Intent(Intent.ACTION_SEND).apply {
         putExtra(Intent.EXTRA_TEXT, text)
@@ -118,6 +125,7 @@ inline fun Context.shareAsText(text: String, onAppNotFound: (e: Exception) -> Un
     startActivityCatching(shareIntent, onAppNotFound)
 }
 
+@Deprecated(Migration)
 inline fun Context.sendEmail(mail: Email, onAppNotFound: (e: Exception) -> Unit) {
     // Use SENDTO to avoid showing pickers and letting non-email apps interfere
     val sendIntent: Intent = Intent(Intent.ACTION_SENDTO).apply {
@@ -130,9 +138,11 @@ inline fun Context.sendEmail(mail: Email, onAppNotFound: (e: Exception) -> Unit)
     startActivityCatching(sendIntent, onAppNotFound)
 }
 
+@Deprecated(Migration)
 val Context.autofillManager
     get() = withApiLevel(VERSION_CODES.O, below = { null }) { getSystemService<AutofillManager>() }
 
+@Deprecated(Migration)
 fun Application.relaunch() {
     // Obtain the startup Intent of the application with the package name of the application
     val intent: Intent? = packageManager.getLaunchIntentForPackage(packageName)?.apply {
@@ -141,8 +151,10 @@ fun Application.relaunch() {
     startActivity(intent)
 }
 
+@Deprecated(Migration)
 val Context.isSystem24Hour get() = DateFormat.is24HourFormat(this)
 
+@Deprecated(Migration)
 fun Uri.asDeeplinkIntent(
     requestCode: Int,
     context: Context
@@ -157,12 +169,14 @@ fun Uri.asDeeplinkIntent(
 /**
  * Returns an URI to [this] raw resource id
  */
+@Deprecated(Migration)
 fun Int.raw(context: Context): Uri = Uri.Builder()
     .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
     .authority(context.applicationContext.packageName)
     .appendPath(toString())
     .build()
 
+@Deprecated(Migration)
 @RequiresApi(VERSION_CODES.O)
 fun Context.openNotificationSettings(onError: (Exception) -> Unit) = startActivityCatching(
     Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
@@ -171,13 +185,16 @@ fun Context.openNotificationSettings(onError: (Exception) -> Unit) = startActivi
     onNotFound = onError,
 )
 
+@Deprecated(Migration)
 val Context.packageUri: Uri get() = "package:$packageName".toUri()
 
+@Deprecated(Migration)
 fun Context.openAppDetails(onError: (Exception) -> Unit) = startActivityCatching(
     Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, packageUri),
     onNotFound = onError,
 )
 
+@Deprecated(Migration)
 inline fun Context.openSystemOverlaysSettings(onError: (Exception) -> Unit) {
     startActivityCatching(
         Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, packageUri).highlightSetting(EXTRA_SYSTEM_ALERT_WINDOW),
@@ -190,6 +207,7 @@ inline fun Context.openSystemOverlaysSettings(onError: (Exception) -> Unit) {
  * @param settingName: Key for permission:
  * https://cs.android.com/android/platform/superproject/+/master:packages/apps/Settings/res/xml/app_info_settings.xml?q=preferred_settings&ss=android%2Fplatform%2Fsuperproject
  */
+@Deprecated(Migration)
 @PublishedApi
 internal fun Intent.highlightSetting(settingName: String) = apply {
     putExtra(EXTRA_FRAGMENT_ARG_KEY, settingName)
@@ -197,25 +215,30 @@ internal fun Intent.highlightSetting(settingName: String) = apply {
     putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, bundle)
 }
 
+@Deprecated(Migration)
 @SuppressLint("BatteryLife")
 inline fun Context.requestIgnoreBatteryOptimization(onError: (Exception) -> Unit) = startActivityCatching(
     Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, packageUri),
     onNotFound = onError,
 )
 
+@Deprecated(Migration)
 @ChecksSdkIntAtLeast(parameter = 0, lambda = 2)
 inline fun withApiLevel(versionCode: Int, since: () -> Unit) {
     if (Build.VERSION.SDK_INT >= versionCode) since()
 }
 
+@Deprecated(Migration)
 @ChecksSdkIntAtLeast(parameter = 0, lambda = 2)
 inline fun <R> withApiLevel(versionCode: Int, below: () -> R, since: () -> R) =
     if (Build.VERSION.SDK_INT >= versionCode) since() else below()
 
+@Deprecated(Migration)
 @RequiresApi(VERSION_CODES.S)
 inline fun Context.requestExactAlarmPermission(onError: (Exception) -> Unit) =
     startActivityCatching(Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM), onNotFound = onError)
 
+@Deprecated(Migration)
 inline fun <T> Context.withPermission(
     permission: String,
     ifDenied: Context.(String) -> T,
@@ -223,12 +246,14 @@ inline fun <T> Context.withPermission(
 ) = if (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED)
     ifGranted(permission) else ifDenied(permission)
 
+@Deprecated(Migration)
 fun Uri.intent() = Intent(Intent.ACTION_VIEW, this)
 
 /**
  * Allows background activity start for this intent starting with SDK 34 (Upside down cake).
  * On previous versions, does nothing.
  */
+@Deprecated(Migration)
 fun Intent.allowBackgroundActivityStart() = apply {
     withApiLevel(VERSION_CODES.UPSIDE_DOWN_CAKE, {}) {
         ActivityOptions
@@ -239,7 +264,9 @@ fun Intent.allowBackgroundActivityStart() = apply {
     }
 }
 
+@Deprecated(Migration)
 fun Context.getGooglePlayUri() = "https://play.google.com/store/apps/details?id=${applicationInfo.packageName}"
 
+@Deprecated(Migration)
 inline fun Context.openAppPlayStorePage(onNotFound: (e: Exception) -> Unit) =
     startActivityCatching(getGooglePlayUri().toUri().intent(), onNotFound)

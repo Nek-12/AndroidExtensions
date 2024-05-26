@@ -16,6 +16,7 @@ import java.util.Locale
  * When you use [Resources.getDimension] you get the amount of pixels for that dimen.
  * This function returns a proper dp value just like what you wrote in your dimen.xml
  */
+@Deprecated(Migration)
 fun Resources.getDimenInDP(id: Int): Int = (getDimension(id) / displayMetrics.density).toInt()
 
 /**
@@ -23,6 +24,7 @@ fun Resources.getDimenInDP(id: Int): Int = (getDimension(id) / displayMetrics.de
  * @param maxSize The maximum size of the longest side of the image (can be either height or width) in pixels
  * @return scaled bitmap
  */
+@Deprecated(Migration)
 fun Bitmap.scale(maxSize: Int): Bitmap {
     val ratio = width.toFloat() / height.toFloat()
     var newWidth = maxSize
@@ -38,16 +40,20 @@ fun Bitmap.scale(maxSize: Int): Bitmap {
 /**
  * Uses the value of this int as a **resource id** to parse an [android.graphics.Color] object
  */
+@Deprecated(Migration)
 fun Int.asColor(context: Context) = ContextCompat.getColor(context, this)
 
 /**
  * Uses this int as a **resource id** to get a drawable
  */
+@Deprecated(Migration)
 fun Int.asDrawable(context: Context) = ContextCompat.getDrawable(context, this)
 
+@Deprecated(Migration)
 val Resources.currentLocale: Locale
     get() = ConfigurationCompat.getLocales(configuration).get(0)!!
 
+@Deprecated(Migration)
 fun Context.getResourceUri(resourceId: Int): Uri = Uri.Builder()
     .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
     .authority(resources.getResourcePackageName(resourceId))

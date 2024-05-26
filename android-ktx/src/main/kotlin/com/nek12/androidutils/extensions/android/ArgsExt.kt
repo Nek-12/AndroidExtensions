@@ -12,20 +12,25 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 import kotlin.reflect.KProperty1
 
+@Deprecated(Migration)
 inline fun <reified T : Activity> Context.intent(vararg extras: Pair<KProperty1<T, *>, Any?>): Intent =
     intentFor<T>(this).setExtras(extras = extras)
 
+@Deprecated(Migration)
 inline fun <reified T : Any> intentFor(context: Context): Intent = Intent(context, T::class.java)
 
+@Deprecated(Migration)
 fun <T : Activity> Intent.setExtras(vararg extras: Pair<KProperty1<T, Any?>, Any?>): Intent = apply {
     putExtras(bundleOf(pairs = extras.map { it.first.name to it.second }.toTypedArray()))
 }
 
+@Deprecated(Migration)
 inline fun <reified T> Activity.extra(defaultValue: T? = null) =
     object : BundleExtra<Activity, T>(null is T, defaultValue) {
         override val bundle: Bundle? get() = intent.extras
     }
 
+@Deprecated(Migration)
 @Suppress("UNCHECKED_CAST")
 abstract class BundleExtra<in T, V>(
     private val isNullable: Boolean,
@@ -51,29 +56,38 @@ abstract class BundleExtra<in T, V>(
     } as V
 }
 
+@Deprecated(Migration)
 @Suppress("ClassName")
 private object UNINITIALIZED_VALUE
 
+@Deprecated(Migration)
 @Suppress("DEPRECATION")
 inline fun <reified T : Serializable> Bundle.serializable(key: String) =
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
         getSerializable(key, T::class.java)
     else getSerializable(key) as? T?
 
+@Deprecated(Migration)
 inline fun <reified T : Serializable> Intent.serializable(key: String): T? = extras?.serializable(key)
 
+@Deprecated(Migration)
 inline fun <reified T : Serializable> Bundle.requireSerializable(key: String): T = requireNotNull(serializable(key))
 
+@Deprecated(Migration)
 inline fun <reified T : Serializable> Intent.requireSerializable(key: String): T = requireNotNull(serializable(key))
 
+@Deprecated(Migration)
 @Suppress("DEPRECATION")
 inline fun <reified T : Parcelable> Bundle.parcelable(key: String): T? =
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
         getParcelable(key, T::class.java)
     else getParcelable(key) as? T?
 
+@Deprecated(Migration)
 inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = extras?.parcelable(key)
 
+@Deprecated(Migration)
 inline fun <reified T : Parcelable> Bundle.requireParcelable(key: String): T = requireNotNull(parcelable(key))
 
+@Deprecated(Migration)
 inline fun <reified T : Parcelable> Intent.requireParcelable(key: String): T = requireNotNull(parcelable(key))

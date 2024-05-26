@@ -5,10 +5,13 @@ package com.nek12.androidutils.extensions.android
 import android.net.Uri
 import androidx.core.net.MailTo
 
+@Deprecated(Migration)
 val Uri.asHttps: Uri get() = if (scheme == "http") buildUpon().scheme("https").build() else this
 
+@Deprecated(Migration)
 val Uri.isHttp get() = scheme?.startsWith("http", true) == true
 
+@Deprecated(Migration)
 val Uri.linkType
     get() = when (this.scheme) {
         null -> LinkType.Unknown
@@ -35,6 +38,7 @@ val Uri.linkType
         else -> LinkType.Other
     }
 
+@Deprecated(Migration)
 enum class LinkType {
     Web,
     Mail,
@@ -60,6 +64,7 @@ enum class LinkType {
     Fax
 }
 
+@Deprecated(Migration)
 data class Email(
     val recipients: List<String>? = null,
     val subject: String? = null,

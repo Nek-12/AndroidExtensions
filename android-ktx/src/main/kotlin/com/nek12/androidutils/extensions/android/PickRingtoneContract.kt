@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContract
  *  if the default was chosen,
  *  * null if the "Silent" item was picked or if there was an error.
  */
+@Deprecated(Migration)
 class PickRingtoneContract : ActivityResultContract<PickRingtoneContract.RingtoneOptions, Uri?>() {
 
     override fun createIntent(context: Context, input: RingtoneOptions): Intent =
@@ -58,6 +59,7 @@ class PickRingtoneContract : ActivityResultContract<PickRingtoneContract.Rington
      * @param showDefault Whether to show the "Default" item in the list.
      * @see RingtoneManager
      */
+    @Deprecated(Migration)
     data class RingtoneOptions(
         val ringtoneType: Int,
         val showDefault: Boolean = true,
