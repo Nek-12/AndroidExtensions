@@ -51,6 +51,7 @@ const val DEF_FADE_DURATION = 250L
  *
  * @see show
  */
+@Deprecated(Deprecation)
 fun View.hide(
     animated: Boolean = false,
     gone: Boolean = false,
@@ -74,6 +75,7 @@ fun View.hide(
  * Shows this view, optionally animating it. Analogous to [hide]
  * @see hide
  */
+@Deprecated(Deprecation)
 fun View.show(
     animated: Boolean = false,
     duration: Long = DEF_FADE_DURATION,
@@ -86,8 +88,10 @@ fun View.show(
     }
 }
 
+@Deprecated(Deprecation)
 fun View.fadeIn(duration: Long = DEF_FADE_DURATION) = show(true, duration)
 
+@Deprecated(Deprecation)
 fun View.fadeOut(duration: Long = DEF_FADE_DURATION) = hide(
     animated = true,
     gone = true,
@@ -99,6 +103,7 @@ fun View.fadeOut(duration: Long = DEF_FADE_DURATION) = hide(
  * You can parse a legacy value or a boolean value.
  * [value] is a legacy value like [View.GONE]
  */
+@Deprecated(Deprecation)
 enum class Visibility(val value: Int) {
 
     VISIBLE(View.VISIBLE), INVISIBLE(View.INVISIBLE), GONE(View.GONE);
@@ -125,6 +130,7 @@ enum class Visibility(val value: Int) {
  * Like [View.getVisibility] but uses modern [Visibility] API.
  * @see [Visibility]
  */
+@Deprecated(Deprecation)
 var View.currentVisibility: Visibility
     get() = Visibility.of(this.visibility)
         ?: throw IllegalArgumentException("No such visibility value")
@@ -135,6 +141,7 @@ var View.currentVisibility: Visibility
 /**
  * Calls either [show] or [hide] depending on the [visibility] parameter
  */
+@Deprecated(Deprecation)
 fun View.setVisibility(
     visibility: Visibility,
     animated: Boolean = false,
@@ -150,6 +157,7 @@ fun View.setVisibility(
 /**
  * Calls either [show] or [hide] depending on the [visible] and [gone] parameters
  */
+@Deprecated(Deprecation)
 fun View.setVisibility(
     visible: Boolean,
     gone: Boolean = true,
@@ -157,12 +165,14 @@ fun View.setVisibility(
     duration: Long = DEF_FADE_DURATION,
 ) = setVisibility(Visibility.of(visible, gone), animated, duration)
 
+@Deprecated(Deprecation)
 fun View.hideKeyboard(): Boolean {
     val inputMethodManager =
         context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     return inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
 }
 
+@Deprecated(Deprecation)
 fun View.showKeyboard(): Boolean {
     if (requestFocus()) {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -177,6 +187,7 @@ fun View.showKeyboard(): Boolean {
  * @see hide
  * @see setVisibility
  */
+@Deprecated(Deprecation)
 fun View.animate(
     @AnimatorRes animator: Int,
     duration: Long = DEF_FADE_DURATION,
@@ -193,6 +204,7 @@ fun View.animate(
 /**
  * Interpret this as DP value and convert it to px. You are responsible for calling this on right value
  */
+@Deprecated(Deprecation)
 val Number.toPx
     get() = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
@@ -203,6 +215,7 @@ val Number.toPx
 /**
  * Interpret this as px value and convert it to dp. You are responsible for calling this on right value
  */
+@Deprecated(Deprecation)
 val Number.toDp
     get() = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_PX,
@@ -216,6 +229,7 @@ inline fun <reified T : View> T.onClick(crossinline block: (T) -> Unit) = setOnC
     )
 }
 
+@Deprecated(Deprecation)
 fun ScrollView.scrollToView(view: View) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         scrollToDescendant(view)
@@ -227,10 +241,12 @@ fun ScrollView.scrollToView(view: View) {
 /*
  * Credits: https://github.com/tunjid/Android-Extensions/blob/develop/view/src/main/java/com/tunjid/androidx/view/util/ViewUtil.kt
  */
+@Deprecated(Deprecation)
 fun ViewGroup.inflate(@LayoutRes res: Int, attachToRoot: Boolean = false): View =
     LayoutInflater.from(context).inflate(res, this, attachToRoot)
 
 @get:ColorInt
+@Deprecated(Deprecation)
 var View.backgroundTint: Int?
     get() = backgroundTintList?.defaultColor
     set(value) {
@@ -240,6 +256,7 @@ var View.backgroundTint: Int?
 /**
  * Show popup menu, using this view as a base
  */
+@Deprecated(Deprecation)
 fun View.showPopup(@MenuRes menu: Int, onMenuItemClick: (item: MenuItem) -> Boolean) {
     val popup = PopupMenu(context, this)
     popup.menuInflater.inflate(menu, popup.menu)
@@ -247,6 +264,7 @@ fun View.showPopup(@MenuRes menu: Int, onMenuItemClick: (item: MenuItem) -> Bool
     popup.show()
 }
 
+@Deprecated(Deprecation)
 inline fun <reified T : View> T.onClickOrHide(
     noinline onClick: ((view: T) -> Unit)?,
     gone: Boolean = true,
@@ -256,11 +274,13 @@ inline fun <reified T : View> T.onClickOrHide(
     onClick?.let { onClick(it) }
 }
 
+@Deprecated(Deprecation)
 fun TextView.setTextOrHide(text: String?, gone: Boolean = false, animated: Boolean = false) {
     setTextKeepState(text)
     setVisibility(text.isValid, gone = gone, animated = animated)
 }
 
+@Deprecated(Deprecation)
 fun ImageView.setDrawableOrHide(
     @DrawableRes res: Int?,
     gone: Boolean = true,
@@ -270,6 +290,7 @@ fun ImageView.setDrawableOrHide(
     res?.let(::setImageResource)
 }
 
+@Deprecated(Deprecation)
 fun ImageView.setDrawableOrHide(
     drawable: Drawable?,
     gone: Boolean = true,
@@ -282,12 +303,14 @@ fun ImageView.setDrawableOrHide(
 /**
  * [EditText.getText] as a [String], if it [isValid]
  */
+@Deprecated(Deprecation)
 val EditText.input get() = text?.toString()?.takeIf { it.isValid }
 
 /**
  * You can use this to try and filter actions that weren't triggered by a user (e.g. you setting text yourself)
  * However there is no guarantee that the view will not be focused when you set the text
  */
+@Deprecated(Deprecation)
 fun EditText.doAfterTextChangedInFocus(action: (String?) -> Unit) = doAfterTextChanged { text ->
     if (isFocused) action(text?.toString())
 }
@@ -296,6 +319,7 @@ fun EditText.doAfterTextChangedInFocus(action: (String?) -> Unit) = doAfterTextC
  * Set the image drawable for this [ImageView] using [avdResId], then start animating it.
  * The animation runs in loops and never stops.
  */
+@Deprecated(Deprecation)
 @SuppressLint("UseCompatLoadingForDrawables")
 // Requires M api and does not use AppCompat because the animation won't work when using appcompat drawable, tested
 fun ImageView.applyLoopingAVD(@DrawableRes avdResId: Int) {
@@ -306,6 +330,7 @@ fun ImageView.applyLoopingAVD(@DrawableRes avdResId: Int) {
     applyLoopingAVD(animated)
 }
 
+@Deprecated(Deprecation)
 fun ImageView.applyLoopingAVD(avd: AnimatedVectorDrawable) {
     avd.registerAnimationCallback(object : Animatable2.AnimationCallback() {
         override fun onAnimationEnd(drawable: Drawable?) {
@@ -316,6 +341,7 @@ fun ImageView.applyLoopingAVD(avd: AnimatedVectorDrawable) {
     avd.start()
 }
 
+@Deprecated(Deprecation)
 fun TextView.setColorOfSubstring(substring: String, color: Int) {
     if (!text?.toString().isValid || !substring.isValid) return
     val spannable = SpannableString(text)
@@ -333,6 +359,7 @@ fun TextView.setColorOfSubstring(substring: String, color: Int) {
  * A class that invokes [onChanged] **after** the text changes. Also validates the query.
  * @see TextWatcher
  */
+@Deprecated(Deprecation)
 class TextChangeListener(private val onChanged: (newText: String?) -> Unit) : TextWatcher {
 
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

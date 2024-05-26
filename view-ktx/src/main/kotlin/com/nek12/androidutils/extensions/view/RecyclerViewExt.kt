@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.math.floor
 
+@Deprecated(Deprecation)
 fun ViewGroup.clearRecyclerViewAdapters() {
     children.forEach {
         when (it) {
@@ -19,6 +20,7 @@ fun ViewGroup.clearRecyclerViewAdapters() {
 /**
  * Execute the specified [action] for each viewholder that is currently visible.
  */
+@Deprecated(Deprecation)
 inline fun <reified T : RecyclerView.ViewHolder> RecyclerView.forEachVisibleHolder(
     action: (T) -> Unit,
 ) {
@@ -27,6 +29,7 @@ inline fun <reified T : RecyclerView.ViewHolder> RecyclerView.forEachVisibleHold
     }
 }
 
+@Deprecated(Deprecation)
 fun <T, R : RecyclerView.ViewHolder?> ListAdapter<T, R>.clear() = submitList(emptyList())
 
 /**
@@ -34,6 +37,7 @@ fun <T, R : RecyclerView.ViewHolder?> ListAdapter<T, R>.clear() = submitList(emp
  * distributed to fill the screen. If you specify 50dp as column width and your screen is
  * 300dp-wide, for example, you will get 6 columns.
  */
+@Deprecated(Deprecation)
 fun RecyclerView.autoFitColumns(columnWidthDP: Int, columnSpacingDp: Int) {
     val displayMetrics = this.resources.displayMetrics
     val noOfColumns = floor(

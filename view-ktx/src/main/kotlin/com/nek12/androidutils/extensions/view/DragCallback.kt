@@ -5,11 +5,20 @@ package com.nek12.androidutils.extensions.view
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
+internal const val Deprecation = """
+    XML is deprecated.
+    The maintainer team no longer uses XML and cannot provide support for this module anymore.
+    Please either: 
+      - Migrate to Compose and use KMPUtils https://github.com/respawn-app/KMPUtils
+      - Copy and paste these extensions into your project
+"""
+
 /**
  * Let your activity / fragment / etc. implement the actions you want and handle
  * Whatever happens after they happen. You can use it with your recyclerviews to quickly get
  * Dragging, reordering, and swiping.
  */
+@Deprecated(Deprecation)
 sealed interface RecyclerViewActions {
 
     interface SwipeActions : RecyclerViewActions {
@@ -45,6 +54,7 @@ sealed interface RecyclerViewActions {
  * @param dragEnabled set this value to enable/disable dragging. By default inferred from [actions]
  *
  */
+@Deprecated(Deprecation)
 open class DragCallback(
     private val actions: RecyclerViewActions,
     var swipeEnabled: Boolean = actions is RecyclerViewActions.SwipeActions,
